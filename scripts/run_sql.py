@@ -11,9 +11,15 @@ Usage
 The database file is outputs/retail.duckdb. It is persistent, so tables created
 by 00_load_raw.sql are still there when 04_monthly_sales.sql runs later.
 Delete the file to start from scratch.
+
+Why DuckDB: it is a single-file analytical SQL engine (no server to install)
+whose dialect is very close to PostgreSQL. Every query here uses standard
+window functions, CTEs and date functions; porting to PostgreSQL or MySQL 8
+needs only small syntax changes (noted in the README).
 """
 import argparse
 import pathlib
+import re
 import sys
 import time
 
@@ -36,12 +42,72 @@ def collect_files(paths):
     return files
 
 
+def split_statements(sql: str):
+    """Split a script on ';' characters that sit outside strings and comments.
+
+    Comments stay attached to the statement that follows them, so the caption
+    printed above each result is the comment written above the query.
+    """
+    statements, buf = [], []
+    i, n = 0, len(sql)
+    in_string = in_line_comment = in_block_comment = False
+    quote = ""
+    while i < n:
+        ch = sql[i]
+        nxt = sql[i + 1] if i + 1 < n else ""
+        if in_line_comment:
+            buf.append(ch)
+            if ch == "\n":
+                in_line_comment = False
+        elif in_block_comment:
+            buf.append(ch)
+            if ch == "*" and nxt == "/":
+                buf.append(nxt)
+                i += 1
+                in_block_comment = False
+        elif in_string:
+            buf.append(ch)
+            if ch == quote:
+                if nxt == quote:          # doubled quote inside a string literal
+                    buf.append(nxt)
+                    i += 1
+                else:
+                    in_string = False
+        elif ch == "-" and nxt == "-":
+            in_line_comment = True
+            buf.append(ch)
+        elif ch == "/" and nxt == "*":
+            in_block_comment = True
+            buf.append(ch)
+        elif ch in ("'", '"'):
+            in_string = True
+            quote = ch
+            buf.append(ch)
+        elif ch == ";":
+            statements.append("".join(buf))
+            buf = []
+        else:
+            buf.append(ch)
+        i += 1
+    statements.append("".join(buf))
+    return statements
+
+
+def strip_comments(query: str) -> str:
+    query = re.sub(r"/\*.*?\*/", "", query, flags=re.S)
+    query = re.sub(r"--[^\n]*", "", query)
+    return query.strip()
+
+
 def leading_comment(query: str) -> str:
-    """Return the first '--' comment line of a statement, used as a caption."""
+    """First meaningful '--' comment line of a statement, used as its caption."""
     for line in query.splitlines():
         line = line.strip()
         if line.startswith("--"):
-            return line.lstrip("- ").strip()
+            text = line.lstrip("- ").strip()
+            if text and not set(text) <= set("=-"):   # skip decorative rules
+                return text
+            continue
         if line:
             break
     return ""
@@ -52,16 +118,16 @@ def run_file(con, path: pathlib.Path, max_rows: int):
     print(f"FILE: {path}")
     print("=" * 100)
     sql = path.read_text(encoding="utf-8")
-    for stmt in con.extract_statements(sql):
-        query = stmt.query.strip()
-        if not query:
+    for query in split_statements(sql):
+        query = query.strip()
+        if not strip_comments(query):      # nothing but comments / whitespace
             continue
         caption = leading_comment(query)
         t0 = time.time()
         con.execute(query)
         try:
             df = con.fetchdf()
-        except Exception:  # DDL statements return nothing to fetch
+        except Exception:                  # DDL statements have nothing to fetch
             df = pd.DataFrame()
         elapsed = time.time() - t0
         if caption:
@@ -86,9 +152,11 @@ def main():
 
     pathlib.Path(args.db).parent.mkdir(parents=True, exist_ok=True)
     con = duckdb.connect(args.db)
-    for f in collect_files(args.paths):
-        run_file(con, f, args.rows)
-    con.close()
+    try:
+        for f in collect_files(args.paths):
+            run_file(con, f, args.rows)
+    finally:
+        con.close()
 
 
 if __name__ == "__main__":
