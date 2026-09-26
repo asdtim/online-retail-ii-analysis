@@ -119,7 +119,8 @@ SELECT
     (SELECT count(*) FROM fact_invoice i LEFT JOIN dim_country c USING (country) WHERE c.country IS NULL)                     AS invoices_without_country,
     (SELECT count(*) FROM (SELECT invoice FROM fact_invoice GROUP BY invoice HAVING count(*) > 1))                            AS duplicate_invoice_keys;
 
--- Invoices whose lines disagree on customer, country or timestamp (should be zero)
+-- Invoices whose lines disagree on customer, country or timestamp.
+-- 83 invoices span two timestamps up to 9 minutes apart (min() is used above); none disagree on customer or country
 SELECT count(*) AS invoices_with_mixed_headers
 FROM (
     SELECT invoice
