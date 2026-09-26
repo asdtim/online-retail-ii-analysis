@@ -1,0 +1,44 @@
+country,region,revenue_dec09_nov10,revenue_dec10_nov11,growth_pct
+United Kingdom,United Kingdom,7887552,7883044,-0.1
+Netherlands,Europe (ex UK),262616,271752,3.5
+EIRE,Europe (ex UK),343737,252257,-26.6
+Germany,Europe (ex UK),173954,193775,11.4
+France,Europe (ex UK),111355,175685,57.8
+Australia,Rest of world,29360,136923,366.4
+Switzerland,Europe (ex UK),40435,52483,29.8
+Spain,Europe (ex UK),33065,51503,55.8
+Japan,Rest of world,4327,35537,721.3
+Belgium,Europe (ex UK),19936,35383,77.5
+Sweden,Europe (ex UK),49179,35166,-28.5
+Norway,Europe (ex UK),6121,29547,382.7
+Portugal,Europe (ex UK),19901,24398,22.6
+Channel Islands,Europe (ex UK),21915,19732,-10.0
+Denmark,Europe (ex UK),45313,17891,-60.5
+Finland,Europe (ex UK),6786,17233,153.9
+Italy,Europe (ex UK),12950,15076,16.4
+Cyprus,Europe (ex UK),11144,12935,16.1
+Hong Kong,Rest of world,3922,9733,148.2
+Singapore,Rest of world,4038,9120,125.9
+Austria,Europe (ex UK),11373,8175,-28.1
+Israel,Rest of world,3199,7902,147.0
+Poland,Europe (ex UK),2987,6853,129.4
+Unspecified,Unspecified,6164,4741,-23.1
+Iceland,Europe (ex UK),612,4085,568.0
+Greece,Europe (ex UK),14235,3880,-72.7
+Canada,Rest of world,1217,3115,156.1
+Malta,Europe (ex UK),2687,2011,-25.1
+United Arab Emirates,Rest of world,7763,1865,-76.0
+Lebanon,Rest of world,212,1694,700.1
+Lithuania,Europe (ex UK),3232,1661,-48.6
+European Community,Europe (ex UK),,1151,
+Brazil,Rest of world,268,1144,326.3
+USA,Rest of world,4109,1116,-72.8
+RSA,Rest of world,2367,1002,-57.6
+Czech Republic,Europe (ex UK),,672,
+Bahrain,Rest of world,2313,548,-76.3
+Saudi Arabia,Rest of world,,131,
+Nigeria,Rest of world,-34,,
+Thailand,Rest of world,3071,,
+Bermuda,Rest of world,1253,,
+Korea,Rest of world,950,,
+West Indies,Rest of world,536,,
