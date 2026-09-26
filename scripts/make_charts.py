@@ -112,8 +112,6 @@ def cohort_heatmap():
     ax.set_xticks(range(mat.shape[1]))
     ax.set_xticklabels(mat.columns)
     ax.xaxis.tick_top()
-    ax.set_xlabel("months since first purchase", color=INK2)
-    ax.xaxis.set_label_position("top")
     ax.set_yticks(range(mat.shape[0]))
     ax.set_yticklabels([f"{lab}  ({sizes[lab]:,})" for lab in mat.index], fontsize=8.5)
     ax.set_xticks(np.arange(-0.5, mat.shape[1], 1), minor=True)
