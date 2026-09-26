@@ -1,0 +1,20 @@
+# Raw data is not committed (45 MB, CC BY 4.0 from UCI) - see README for the download step
+data/raw/*
+!data/raw/.gitkeep
+
+# DuckDB database file built by scripts/run_sql.py
+outputs/*.duckdb
+outputs/*.duckdb.wal
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+~$*
+
+# Line-level Tableau extract (~90 MB) is rebuilt by sql/99_export_tableau.sql
+outputs/tableau/sales_lines.csv
