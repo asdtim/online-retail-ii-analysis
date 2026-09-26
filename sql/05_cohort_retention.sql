@@ -44,11 +44,24 @@ FROM activity a
 JOIN cohort_size s USING (cohort_month)
 ORDER BY a.cohort_month, a.period_number;
 
--- Retention matrix, months 0-12 (rows = cohort, columns = months since first purchase)
-PIVOT (SELECT cohort_label, cohort_customers, period_number, retention_pct
-       FROM rpt_cohort_retention WHERE period_number <= 12)
-ON period_number
-USING first(retention_pct)
+-- Retention matrix, months 0-12 (rows = cohort, columns = months since first purchase).
+-- Conditional aggregation instead of PIVOT so the query is portable across SQL dialects.
+SELECT cohort_label,
+       cohort_customers,
+       max(retention_pct) FILTER (WHERE period_number = 0)  AS m0,
+       max(retention_pct) FILTER (WHERE period_number = 1)  AS m1,
+       max(retention_pct) FILTER (WHERE period_number = 2)  AS m2,
+       max(retention_pct) FILTER (WHERE period_number = 3)  AS m3,
+       max(retention_pct) FILTER (WHERE period_number = 4)  AS m4,
+       max(retention_pct) FILTER (WHERE period_number = 5)  AS m5,
+       max(retention_pct) FILTER (WHERE period_number = 6)  AS m6,
+       max(retention_pct) FILTER (WHERE period_number = 7)  AS m7,
+       max(retention_pct) FILTER (WHERE period_number = 8)  AS m8,
+       max(retention_pct) FILTER (WHERE period_number = 9)  AS m9,
+       max(retention_pct) FILTER (WHERE period_number = 10) AS m10,
+       max(retention_pct) FILTER (WHERE period_number = 11) AS m11,
+       max(retention_pct) FILTER (WHERE period_number = 12) AS m12
+FROM rpt_cohort_retention
 GROUP BY cohort_label, cohort_customers
 ORDER BY cohort_label;
 
@@ -75,14 +88,3 @@ SELECT period_number, cohort_customers, active_customers, retention_pct
 FROM rpt_cohort_retention
 WHERE cohort_month = DATE '2009-12-01' AND period_number <= 12
 ORDER BY period_number;
-
--- Month 1 / 3 / 6 / 12 retention by cohort: are newer cohorts better or worse?
-SELECT cohort_label,
-       cohort_customers,
-       max(retention_pct) FILTER (WHERE period_number = 1)  AS month_1_pct,
-       max(retention_pct) FILTER (WHERE period_number = 3)  AS month_3_pct,
-       max(retention_pct) FILTER (WHERE period_number = 6)  AS month_6_pct,
-       max(retention_pct) FILTER (WHERE period_number = 12) AS month_12_pct
-FROM rpt_cohort_retention
-GROUP BY cohort_label, cohort_customers
-ORDER BY cohort_label;
