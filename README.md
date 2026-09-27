@@ -17,7 +17,7 @@ Tableau Public dashboard and for the charts below.
 | Net revenue (sales minus cancellations) | £18.9M |
 | Like-for-like growth, Dec 10-Nov 11 vs Dec 09-Nov 10 | +1.9% net revenue, -4.0% orders, +6.8% average order value |
 
-**Dashboard:** interactive version on [Tableau Public](https://public.tableau.com/app/profile/tim.smitn/viz/online_retail_dashboard_17905439682910/OnlineRetailII); screenshot in the Dashboard section below.
+**Dashboard:** interactive version on [Tableau Public](https://public.tableau.com/app/profile/shihaozhou/viz/online_retail_dashboard_17905439682910/OnlineRetailII); screenshot in the Dashboard section below.
 
 ---
 
@@ -248,9 +248,9 @@ line is matched to the latest earlier sale of the same customer and product
 
 ## Dashboard
 
-[![Dashboard](docs/dashboard.png)](https://public.tableau.com/app/profile/tim.smitn/viz/online_retail_dashboard_17905439682910/OnlineRetailII)
+[![Dashboard](docs/dashboard.png)](https://public.tableau.com/app/profile/shihaozhou/viz/online_retail_dashboard_17905439682910/OnlineRetailII)
 
-Interactive version: https://public.tableau.com/app/profile/tim.smitn/viz/online_retail_dashboard_17905439682910/OnlineRetailII
+Interactive version: https://public.tableau.com/app/profile/shihaozhou/viz/online_retail_dashboard_17905439682910/OnlineRetailII
 
 Six views built from the CSVs in `outputs/tableau/`: monthly net revenue,
 overseas markets map with a region filter, cohort retention heat map, RFM
