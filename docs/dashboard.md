@@ -1,6 +1,6 @@
 # Dashboard notes
 
-Published workbook: https://public.tableau.com/app/profile/tim.smitn/viz/online_retail_dashboard_17905382659160/OnlineRetailII
+Published workbook: https://public.tableau.com/app/profile/tim.smitn/viz/online_retail_dashboard_17905439682910/OnlineRetailII
 
 The dashboard has six views. Each one reads a CSV that
 `sql/99_export_tableau.sql` writes to `outputs/tableau/`.
