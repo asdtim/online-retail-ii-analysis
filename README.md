@@ -45,7 +45,9 @@ The raw file is not committed (45 MB); `scripts/00_download_data.py` fetches it.
 
 * **SQL on [DuckDB](https://duckdb.org)** for all of the analysis. DuckDB is a
   single-file engine with no server to install; its dialect is close to
-  PostgreSQL. Notes on porting to PostgreSQL / MySQL are at the end.
+  PostgreSQL. Apart from a few DuckDB functions (`FILTER`, `quantile_cont`,
+  `strftime`) the SQL is standard and would need only small edits to run on
+  PostgreSQL or MySQL.
 * **Python** for the Excel-to-CSV conversion, for running the SQL files in
   order, and for the README charts (pandas, matplotlib).
 * **Tableau Public** for the dashboard, built from the exported CSVs.
@@ -294,17 +296,6 @@ outputs/
 docs/
   dashboard.md               which CSV feeds which dashboard view
 ```
-
-## Porting the SQL to PostgreSQL or MySQL
-
-The queries use CTEs, window functions and `FILTER (WHERE ...)`. To run them
-elsewhere: PostgreSQL needs `quantile_cont(x, 0.5)` written as
-`percentile_cont(0.5) WITHIN GROUP (ORDER BY x)`, `strftime(d, '%Y-%m')` as
-`to_char(d, 'YYYY-MM')`, `date_diff('month', a, b)` as an `age()` expression,
-and `read_csv` / `COPY ... TO` replaced by `COPY` or `\copy`. MySQL 8 additionally
-lacks `FILTER`, so each one becomes `SUM(CASE WHEN ... THEN ... END)`, and
-`quantile_cont` needs a window-function workaround. `GROUP BY ALL` is DuckDB
-shorthand for listing the non-aggregated columns.
 
 ## Licence and citation
 

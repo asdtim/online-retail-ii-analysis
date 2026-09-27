@@ -17,7 +17,7 @@
 
 ## 用什么做的
 
-* **SQL（DuckDB）**：所有分析。DuckDB 是单文件分析型数据库，不用装服务器，语法接近 PostgreSQL；README 末尾有迁移到 PostgreSQL / MySQL 的注意事项。
+* **SQL（DuckDB）**：所有分析。DuckDB 是单文件分析型数据库，不用装服务器，语法接近 PostgreSQL；除了几个 DuckDB 自带的函数，SQL 都是标准写法，换到 PostgreSQL 或 MySQL 只需少量修改。
 * **Python**：只用于 Excel 转 CSV、按顺序执行 SQL 文件、画 README 里的图。
 * **Tableau Public**：仪表板，数据来自导出的 CSV（哪个文件对应哪张图见 `docs/dashboard.md`）。
 
