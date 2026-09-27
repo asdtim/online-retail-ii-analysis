@@ -58,6 +58,7 @@ python scripts/00_download_data.py     # 45 MB from UCI into data/raw/
 python scripts/01_excel_to_csv.py      # two Excel sheets -> one CSV (about 2 minutes)
 python scripts/run_sql.py sql          # runs sql/00 ... sql/99 in order, prints every result
 python scripts/make_charts.py          # PNG charts for this README
+python scripts/sql_shell.py            # optional: interactive prompt to try your own queries
 ```
 
 `run_sql.py` keeps its database in `outputs/retail.duckdb`; the Tableau CSVs
@@ -285,6 +286,7 @@ scripts/
   00_download_data.py        fetch the UCI zip
   01_excel_to_csv.py         workbook -> CSV
   run_sql.py                 run .sql files against DuckDB, print results
+  sql_shell.py               interactive prompt for ad-hoc queries
   make_charts.py             README charts
 outputs/
   tableau/                   exported report tables (committed, small)

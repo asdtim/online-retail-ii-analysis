@@ -29,6 +29,7 @@ python scripts/00_download_data.py     # 从 UCI 下载 45 MB 原始数据
 python scripts/01_excel_to_csv.py      # 两个 Excel 表页合成一个 CSV，约 2 分钟
 python scripts/run_sql.py sql          # 按 00 → 99 顺序跑完所有 SQL，打印每一步结果
 python scripts/make_charts.py          # 生成 README 用的四张图
+python scripts/sql_shell.py            # 可选：打开一个提示符自己敲查询
 ```
 
 ## 数据清洗要点（`sql/01`、`sql/02`）
