@@ -18,3 +18,6 @@ Thumbs.db
 
 # Line-level Tableau extract (~90 MB) is rebuilt by sql/99_export_tableau.sql
 outputs/tableau/sales_lines.csv
+
+# Tableau Hyper engine log written when building extracts
+hyperd.log
