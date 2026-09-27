@@ -17,7 +17,7 @@ Tableau Public dashboard and for the charts below.
 | Net revenue (sales minus cancellations) | £18.9M |
 | Like-for-like growth, Dec 10-Nov 11 vs Dec 09-Nov 10 | +1.9% net revenue, -4.0% orders, +6.8% average order value |
 
-**Dashboard:** Tableau Public link to be added once published (see `docs/dashboard.md`).
+**Dashboard:** interactive version on [Tableau Public](https://public.tableau.com/app/profile/tim.smitn/viz/online_retail_dashboard_17905382659160/OnlineRetailII); screenshot in the Dashboard section below.
 
 ---
 
@@ -248,10 +248,15 @@ line is matched to the latest earlier sale of the same customer and product
 
 ## Dashboard
 
-Tableau Public workbook with four views built from `outputs/tableau/`:
-monthly revenue trend, cohort retention heat map, RFM segments, country map.
+[![Dashboard](docs/dashboard.png)](https://public.tableau.com/app/profile/tim.smitn/viz/online_retail_dashboard_17905382659160/OnlineRetailII)
+
+Interactive version: https://public.tableau.com/app/profile/tim.smitn/viz/online_retail_dashboard_17905382659160/OnlineRetailII
+
+Six views built from the CSVs in `outputs/tableau/`: monthly net revenue,
+overseas markets map with a region filter, cohort retention heat map, RFM
+segments coloured by customer status, orders by weekday and hour, and a slope
+chart of the top overseas markets year on year.
 [docs/dashboard.md](docs/dashboard.md) lists which CSV feeds which view.
-Link and screenshot will be added here once published.
 
 ## Limitations
 
