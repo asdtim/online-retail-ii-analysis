@@ -79,7 +79,8 @@ SELECT customer_id,
            WHEN r_score  = 2                   THEN 'Hibernating'
            ELSE 'Lost'
        END AS segment
-FROM segmented;
+FROM segmented
+ORDER BY customer_id;
 
 -- Quintile thresholds actually used (frequency is heavily skewed: most customers order once or twice)
 WITH b AS (SELECT recency_days, frequency, monetary FROM rpt_rfm_customer)

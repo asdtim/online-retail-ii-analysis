@@ -50,7 +50,8 @@ SELECT p.stock_code,
        round(100.0 * coalesce(p.returned_value, 0) / p.gross_sales, 2)  AS value_return_rate_pct
 FROM per_product p
 JOIN dim_product d USING (stock_code)
-WHERE p.units_sold > 0;
+WHERE p.units_sold > 0
+ORDER BY p.stock_code;
 
 -- Products with the most value returned
 SELECT stock_code, description, units_sold, units_returned, gross_sales, returned_value, value_return_rate_pct
@@ -109,7 +110,8 @@ SELECT cancel_invoice, line_no, customer_id, stock_code, cancel_ts, cancel_qty, 
        sale_ts, sale_qty,
        date_diff('day', sale_ts, cancel_ts) AS days_since_sale
 FROM candidates
-WHERE rn = 1;
+WHERE rn = 1
+ORDER BY cancel_invoice, line_no;
 
 -- How long after the sale do cancellations happen?
 SELECT CASE WHEN sale_ts IS NULL          THEN '6. no earlier sale found (bought before Dec 2009)'

@@ -39,7 +39,8 @@ SELECT r.customer_id,
        count(*) >= 2                                                AS is_repeat_customer
 FROM ranked r
 JOIN dim_customer c USING (customer_id)
-GROUP BY r.customer_id, c.country, c.cohort_month;
+GROUP BY r.customer_id, c.country, c.cohort_month
+ORDER BY r.customer_id;
 
 -- Headline: one-time vs repeat customers and their share of sales
 SELECT CASE WHEN is_repeat_customer THEN 'repeat (2+ order days)' ELSE 'one-time' END AS customer_type,

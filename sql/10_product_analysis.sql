@@ -20,7 +20,7 @@ FROM fact_invoice_line l
 JOIN fact_invoice i USING (invoice)
 JOIN dim_product  p USING (stock_code)
 GROUP BY l.stock_code, p.description, p.first_sold_date, p.last_sold_date
-ORDER BY net_revenue DESC;
+ORDER BY net_revenue DESC, l.stock_code;
 
 -- Top 20 products by net revenue
 SELECT stock_code, description, units_sold, net_revenue, orders, customers, avg_unit_price

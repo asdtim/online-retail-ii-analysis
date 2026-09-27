@@ -61,7 +61,7 @@ SELECT w.country,
        round(100.0 * (w.revenue_y2 / nullif(w.revenue_y1, 0) - 1), 1) AS growth_pct
 FROM windows w
 JOIN dim_country c USING (country)
-ORDER BY w.revenue_y2 DESC;
+ORDER BY w.revenue_y2 DESC NULLS LAST, w.country;
 
 SELECT * FROM rpt_country_growth LIMIT 12;
 

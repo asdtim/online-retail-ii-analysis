@@ -37,4 +37,5 @@ COPY (
     JOIN fact_invoice i USING (invoice)
     JOIN dim_country  c USING (country)
     JOIN dim_product  p USING (stock_code)
+    ORDER BY l.invoice, l.line_no
 ) TO 'outputs/tableau/sales_lines.csv' (HEADER, DELIMITER ',');
