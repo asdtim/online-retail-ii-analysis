@@ -66,7 +66,7 @@ def monthly_trend():
     full, part = m[m.is_complete_month], m[~m.is_complete_month]
 
     fig, ax = new_figure("Monthly net revenue, Dec 2009 - Dec 2011",
-                         "Sales minus cancellations, GBP. November peaks are the Christmas trade of a gift wholesaler.")
+                         "Sales minus cancellations, GBP. Sales peak every November, ahead of Christmas.")
     y_grid(ax)
     ax.plot(full.invoice_month, full.net_revenue / 1e6, color=BLUE, lw=2,
             marker="o", ms=4.5, mfc=SURFACE, mew=1.6)
